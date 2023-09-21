@@ -114,12 +114,30 @@ __classes__,
 
 *Find*
 ```js
-shouldShowContainer() {
-    return __ret__
+var $ = $SharedModules['h']($z());
+var $ = class extends $.Class{____};
+var {____} = $Si.Components,
+$B0 = class extends $Si.Class {__controller__};
+var $ = $SharedModules['h']($z());
+var $ = $SharedModules['h']($z());
+var $ = $SharedModules['h']($z());
+```
+
+*Find* inside `controller`
+```js
+init() {
+  ____
+}
+template() {
+  return $Si.createElement("div", null, $Si.createElement("div", __props__))
 }
 ```
 
-*Replace* `ret` with
+*Replace* `props` with
 ```js
-__ret__ || (!DSM.pillboxMenus?.showHorizontalPillboxMenu())
+$Si.createElement(ph, {
+    predicate: this.bindFn(DSM.pillboxMenus?.showHorizontalPillboxMenu)
+}, ()=>$Si.createElement(O0, {
+    controller: this.props.controller
+}))
 ```
