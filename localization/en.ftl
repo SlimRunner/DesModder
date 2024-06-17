@@ -355,6 +355,8 @@ better-navigation-opt-scrollableExpressions-desc = Adds horizontal scrollbars to
 ## Change Username
 change-username-name = Change Username
 change-username-desc = Changes the user name
+change-username-opt-customText-name = Custom text
+change-username-opt-customText-desc = Text that will replace the username.
 
 ## Paste Image
 paste-image-name = Paste Image
