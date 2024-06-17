@@ -31,6 +31,7 @@ import WolframToDesmos from "./wolfram2desmos";
 import BetterNavigation from "./better-navigation";
 import OverrideKeystroke from "../core-plugins/override-keystroke";
 import { DispatchedEvent } from "src/globals/extra-actions";
+import ChangeUsername from "./change-username";
 
 interface ConfigItemGeneric {
   // indentation level for hierarchical relationships in settings
@@ -148,6 +149,7 @@ export const keyToPlugin = {
   codeGolf: CodeGolf,
   syntaxHighlighting: SyntaxHighlighting,
   betterNavigation: BetterNavigation,
+  changeUsername: ChangeUsername,
   pasteImage: PasteImage,
 } satisfies Record<string, Plugin<any>>;
 
@@ -203,6 +205,7 @@ export class TransparentPlugins implements KeyToPluginInstance {
   get codeGolf () { return this.ep["code-golf"]; }
   get syntaxHighlighting () { return this.ep["syntax-highlighting"]}
   get betterNavigation () { return this.ep["better-navigation"]} 
+  get changeUsername () { return this.ep["change-username"] }
   get pasteImage () { return this.ep["paste-image"]; }
 }
 

@@ -352,6 +352,10 @@ better-navigation-opt-ctrlArrow-desc = Use Ctrl+ArrowKeys or Ctrl+Shift+ArrowKey
 better-navigation-opt-scrollableExpressions-name = Scrollable Expressions
 better-navigation-opt-scrollableExpressions-desc = Adds horizontal scrollbars to expressions. This is primarily intended to make scrolling easier on mobile.
 
+## Change Username
+change-username-name = Change Username
+change-username-desc = Changes the user name
+
 ## Paste Image
 paste-image-name = Paste Image
 paste-image-desc = Lets you paste image files to import them at once.
