@@ -1,9 +1,8 @@
 import { PluginController } from "#plugins/PluginController.js";
 import { Config, configList } from "./config";
 
-function getHeaderElement() {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  return document.querySelector(".header-account-name") as HTMLElement | null;
+function getHeaderElement(): HTMLElement | null {
+  return document.querySelector(".header-account-name");
 }
 
 export default class ChangeUsername extends PluginController<Config> {
