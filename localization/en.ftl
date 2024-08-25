@@ -367,11 +367,11 @@ better-navigation-opt-scrollableExpressions-desc = Adds horizontal scrollbars to
 better-navigation-opt-showScrollbar-name = Show Scrollbar
 better-navigation-opt-showScrollbar-desc = Shows or hides scrollbar. It is convenient to turn this off for touch devices.
 
-## Change Username
-change-username-name = Change Username
-change-username-desc = Changes the user name
-change-username-opt-customText-name = Custom text
-change-username-opt-customText-desc = Text that will replace the username.
+## Sample Plugin
+sample-plugin-name = Sample Plugin
+sample-plugin-desc = Showcase of things plugins can do
+sample-plugin-opt-customText-name = Custom text
+sample-plugin-opt-customText-desc = Text that will replace the username.
 
 ## Paste Image
 paste-image-name = Paste Image

@@ -6,7 +6,7 @@ function getHeaderElement(): HTMLElement | null {
 }
 
 export default class ChangeUsername extends PluginController<Config> {
-  static id = "change-username" as const;
+  static id = "sample-plugin" as const;
   static enabledByDefault = true;
   static config = configList;
   oldName = "";
