@@ -30,7 +30,7 @@ import WolframToDesmos from "./wolfram2desmos";
 import BetterNavigation from "./better-navigation";
 import OverrideKeystroke from "../core-plugins/override-keystroke";
 import { DispatchedEvent } from "src/globals/extra-actions";
-import ChangeUsername from "./change-username";
+import ChangeUsername from "./sample-plugin";
 
 interface ConfigItemGeneric {
   // indentation level for hierarchical relationships in settings
@@ -200,7 +200,7 @@ export class TransparentPlugins implements KeyToPluginInstance {
   get codeGolf () { return this.ep["code-golf"]; }
   get syntaxHighlighting () { return this.ep["syntax-highlighting"]}
   get betterNavigation () { return this.ep["better-navigation"]} 
-  get changeUsername () { return this.ep["change-username"] }
+  get changeUsername () { return this.ep["sample-plugin"] }
 }
 
 export type IDToPluginSettings = {
