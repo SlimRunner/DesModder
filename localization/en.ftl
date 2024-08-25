@@ -352,11 +352,11 @@ better-navigation-opt-ctrlArrow-desc = Use Ctrl+ArrowKeys or Ctrl+Shift+ArrowKey
 better-navigation-opt-scrollableExpressions-name = Scrollable Expressions
 better-navigation-opt-scrollableExpressions-desc = Adds horizontal scrollbars to expressions. This is primarily intended to make scrolling easier on mobile.
 
-## Change Username
-change-username-name = Change Username
-change-username-desc = Changes the user name
-change-username-opt-customText-name = Custom text
-change-username-opt-customText-desc = Text that will replace the username.
+## Sample Plugin
+sample-plugin-name = Sample Plugin
+sample-plugin-desc = Showcase of things plugins can do
+sample-plugin-opt-customText-name = Custom text
+sample-plugin-opt-customText-desc = Text that will replace the username.
 
 ## Paste Image
 paste-image-name = Paste Image
