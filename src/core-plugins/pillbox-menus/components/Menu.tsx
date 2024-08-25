@@ -61,7 +61,7 @@ const categoryPlugins: Record<string, PluginID[]> = {
     "syntax-highlighting",
     "quake-pro",
     "scroll-beyond",
-    "change-username",
+    "sample-plugin",
   ],
   integrations: ["wakatime"],
 };
