@@ -144,6 +144,39 @@ export class Driver {
     }, index);
   }
 
+  async setCaptureSize(width: string, height: string) {
+    await this.evaluate(
+      async (width, height) => {
+        DSM.videoCreator?.captureWidth.setLatexWithCallbacks(width);
+        DSM.videoCreator?.captureHeight.setLatexWithCallbacks(height);
+      },
+      width,
+      height
+    );
+  }
+
+  async getCaptureSize() {
+    return await this.evaluate(async () => {
+      const width = DSM.videoCreator?.captureWidth.getValue() ?? null;
+      const height = DSM.videoCreator?.captureHeight.getValue() ?? null;
+      if (width === null || height === null) {
+        return null;
+      }
+      return { width, height };
+    });
+  }
+
+  async setCaptureChecks(fastSS: boolean, samePixRatio: boolean) {
+    await this.evaluate(
+      async (fastSS, samePixRatio) => {
+        DSM.videoCreator?.setFastScreenshots(fastSS);
+        DSM.videoCreator?.setSamePixelRatio(samePixRatio);
+      },
+      fastSS,
+      samePixRatio
+    );
+  }
+
   async setLatexAndSync(latex: string) {
     await this.evaluate((latex) => {
       Calc.controller.dispatch({
