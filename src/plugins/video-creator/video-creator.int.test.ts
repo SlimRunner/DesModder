@@ -48,12 +48,15 @@ describe("Video Creator", () => {
     await driver.assertSelectorEventually(CAPTURE);
     await driver.assertSelectorNot(PREVIEW, EXPORT);
 
+    // test all capture options
     const testSettings = [
-      { fast: false, pixratio: false }, // fails 0.5:1 and 0.5:0.5
-      { fast: false, pixratio: true }, // passes all
-      { fast: true, pixratio: false }, // fails 0.5:1 and 0.5:0.5
-      { fast: true, pixratio: true }, // passes all
+      { fast: false, pixratio: false },
+      { fast: false, pixratio: true },
+      { fast: true, pixratio: false },
+      { fast: true, pixratio: true },
     ];
+
+    // test different ratios and sizes
     const testRatios = [
       { width: 1, height: 1 }, // as is
       { width: 0.5, height: 1 }, // smaller width
@@ -62,6 +65,9 @@ describe("Video Creator", () => {
       { width: 1, height: 2 }, // larger height
       { width: 0.5, height: 0.5 }, // smaller image
       { width: 2, height: 2 }, // larger image
+      { width: 1.5, height: 1.25 },
+      { width: 0.75, height: 1.123 },
+      { width: 1.2, height: 0.256 },
     ];
 
     const defaultSize = await driver.getCaptureSize();
@@ -69,17 +75,19 @@ describe("Video Creator", () => {
       fail("Default size is undefined");
     }
 
+    // iterate through all combinations of tests
     for (const setting of testSettings) {
+      // set screenshot options
       await driver.setCaptureChecks(setting.fast, setting.pixratio);
 
       for (const ratio of testRatios) {
+        // set screenshot size
         await driver.setCaptureSize(
-          (defaultSize.width * ratio.width).toString(),
-          (defaultSize.height * ratio.height).toString()
+          Math.floor(defaultSize.width * ratio.width).toString(),
+          Math.floor(defaultSize.height * ratio.height).toString()
         );
-        await driver.waitForSync();
 
-        // Evaluate capture size entry to get/set expected screenshot size
+        // get size from latex fields to make sure it updated
         const { width, height } = await driver.page.$eval(
           ".dsm-vc-capture-size",
           (elem) => {
@@ -94,7 +102,6 @@ describe("Video Creator", () => {
             };
 
             return result;
-            // return {widthEntry, heightEntry};
           }
         );
         expect(width && width !== -1, `width is ${width?.toString()}`).toBeTruthy();
@@ -105,7 +112,7 @@ describe("Video Creator", () => {
         await driver.assertSelectorEventually(PREVIEW);
         await driver.assertSelector(CAPTURE, EXPORT, PREVIEW_IMG);
 
-        // Evaluate preview image element to get actual screenshot size.
+        // Get size of screenshot captured
         const imagePreview = await driver.page.$eval(PREVIEW_IMG, (elem) => {
           return {
             naturalWidth: elem.naturalWidth,
@@ -113,15 +120,16 @@ describe("Video Creator", () => {
           };
         });
 
-        const msgReceived = `${imagePreview.naturalWidth}×${imagePreview.naturalHeight}`;
+        const msgRecived = `${imagePreview.naturalWidth}×${imagePreview.naturalHeight}`;
         const msgExpected = `${width}×${height}`;
-        const msg =
-          `expected: ${msgExpected}, received: ${msgReceived}, ` +
+        const errorMsg =
+          `expected: ${msgExpected}, recived: ${msgRecived}, ` +
           `ratio: ${ratio.width}:${ratio.height}`;
 
-        expect(imagePreview.naturalWidth, msg).toEqual(width);
-        expect(imagePreview.naturalHeight, msg).toEqual(height);
+        expect(imagePreview.naturalWidth, errorMsg).toEqual(width);
+        expect(imagePreview.naturalHeight, errorMsg).toEqual(height);
 
+        // click the remove frame button
         await driver.click(".dsm-vc-remove-frame");
       }
     }
