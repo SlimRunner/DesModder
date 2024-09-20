@@ -36,6 +36,7 @@ const pluginNames = [
   "multiline",
   "intellisense",
   "override-keystroke",
+  "compact-view",
 ];
 
 replacements.forEach((r) => {
