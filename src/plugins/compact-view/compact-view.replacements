@@ -1,0 +1,48 @@
+# Replacements for Compact View
+
+*plugin* `compact-view`
+
+## Track when expression divs go off-screen
+
+*Description* `Captures the expressions that go off-screen`
+
+This one was found by searching for "dcg-expressionitem dcg-shell" but
+the code within brackets is unique so I used that to make the search
+shorter.
+
+*Find* => `jsx_template_exit`
+```js
+return this.model.cachedRenderHeight && ($e = "height:" + this.model.cachedRenderHeight + "px"),
+__rest__
+```
+
+*Replace* `jsx_template_exit` with
+```js
+if (this.model.type === "folder") {
+  console.log(`%cexit: ${this.model.id}`, "color:red; font-size:large");
+}
+__jsx_template_exit__
+```
+
+## Track when expression divs go into screen
+
+*Description* `Captures the expressions that go enter the screen`
+
+This one was found by simply searching for "dcg-expressionfolder" in the
+client-side code
+
+*Find* => `jsx_template_enter`
+```js
+  return $.createElement("div", {
+    class: () => ({
+      "dcg-do-not-blur": !0,
+      "dcg-expressionitem": !0,
+      "dcg-readonly": this.controller.isItemReadonly(this.id),
+      "dcg-expressionfolder": !0,
+```
+
+*Replace* `jsx_template_enter` with
+```js
+console.log(`%center: ${this.model.id}`, "color:green; font-size:large");
+__jsx_template_enter__
+```
