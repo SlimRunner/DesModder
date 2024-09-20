@@ -15,6 +15,7 @@ import textMode from "#plugins/text-mode/text-mode.replacements";
 import insertPanels from "../preload/moduleOverrides/insert-panels.replacements";
 import quakePro from "#plugins/quake-pro/quake-pro.replacements";
 import videoCreator from "#plugins/video-creator/video-creator.replacements";
+import compactView from "#plugins/compact-view/compact-view.replacements";
 
 export default [
   insertPanels,
@@ -34,4 +35,5 @@ export default [
   syntaxHighlighting,
   quakePro,
   videoCreator,
+  compactView,
 ];
