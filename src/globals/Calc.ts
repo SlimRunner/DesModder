@@ -281,6 +281,12 @@ interface CalcPrivate {
   controller: {
     rootElt: HTMLElement;
     isNarrow: () => boolean;
+    // _removeExpressionSynchronously(model: ItemModel): void;
+    _closeAddExpression: () => void;
+    _toplevelNewItemAtSelection: (
+      expr: ItemModel,
+      opts: { shouldFocus: boolean }
+    ) => void;
     handleDispatchedAction: (evt: DispatchedEvent) => void;
     _toplevelReplaceItemAt: (
       index: number,
@@ -316,6 +322,7 @@ interface CalcPrivate {
     getAllSelectedItems: () => ItemModel[];
     getItemModelByIndex: (index: number) => ItemModel | undefined;
     getAllItemModels: () => ItemModel[];
+    getNextColor: () => string;
     stopAllSliders: () => void;
     isKeypadOpen: () => boolean;
     getDegreeMode: () => boolean;
