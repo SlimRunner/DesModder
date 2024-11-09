@@ -310,6 +310,21 @@ export default class SelectCapture extends Component<{
               </div>
             )}
           </If>
+          <If predicate={() => this.vc.captureMethod === "action"}>
+            {() => (
+              <div class="dsm-vc-end-condition-settings">
+                {format("video-creator-nth-frame")}
+                <ManagedNumberInput
+                  focusID="capture-nth-frame"
+                  // TODO-localization
+                  ariaLabel="nth frame"
+                  hasError={() => !this.vc.isNthFrameValid()}
+                  vc={this.vc}
+                  data={this.vc.nthFrame}
+                />
+              </div>
+            )}
+          </If>
           <If predicate={() => this.vc.captureMethod === "ntimes"}>
             {() => (
               <div class="dsm-vc-end-condition-settings">
