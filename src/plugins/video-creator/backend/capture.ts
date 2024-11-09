@@ -11,6 +11,7 @@ export const CANCELLED = Symbol("cancelled");
 async function captureAndApplyFrame(vc: VideoCreator) {
   const frame = await captureFrame(vc);
   if (frame === CANCELLED) return CANCELLED;
+  if (vc.canSkipThisFrame()) return;
   await vc.pushFrame(frame);
 }
 
@@ -236,6 +237,7 @@ async function captureActionOrSliderTicks(vc: VideoCreator, step: () => void) {
   while ((tickCountRemaining = vc.getTickCountNumber()) > 0) {
     const ret = await captureAndApplyFrame(vc);
     if (ret === CANCELLED) break;
+    vc.currentCaptureIndex += 1;
     const nextTickCount = tickCountRemaining - 1;
     vc.tickCount.setLatexWithCallbacks(nextTickCount.toFixed(0));
     if (nextTickCount <= 0) break;
@@ -353,6 +355,7 @@ export async function capture(vc: VideoCreator) {
   }
   switch (vc.captureMethod) {
     case "action": {
+      vc.currentCaptureIndex = 0;
       const step = () => {
         if (vc.currentActionID === null) return;
         vc.cc.dispatch({

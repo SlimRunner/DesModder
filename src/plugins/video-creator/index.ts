@@ -31,6 +31,7 @@ export default class VideoCreator extends PluginController {
 
   ffmpegLoaded = false;
   frames: string[] = [];
+  currentCaptureIndex: number = 0;
   isCapturing = false;
   captureCancelled = false;
   callbackIfCancel?: () => void;
@@ -70,6 +71,7 @@ export default class VideoCreator extends PluginController {
 
   currentActionID: string | null = null;
   readonly tickCount = this.managedNumberInputModel("10");
+  readonly nthFrame = this.managedNumberInputModel("1");
   readonly tickTimeStep = this.managedNumberInputModel("40");
 
   // ** capture sizing
@@ -360,9 +362,27 @@ export default class VideoCreator extends PluginController {
     return this.tickCount.getValue();
   }
 
+  getNthFrameNumber() {
+    return this.nthFrame.getValue();
+  }
+
   isTickCountValid() {
     const tc = this.getTickCountNumber();
     return isPositiveInteger(tc);
+  }
+
+  isNthFrameValid() {
+    const nth = this.getNthFrameNumber();
+    return Number.isInteger(nth) && nth > 0;
+  }
+
+  canSkipThisFrame() {
+    const nth = this.getNthFrameNumber();
+    return (
+      this.#captureMethod === "action" &&
+      nth !== 0 &&
+      this.currentCaptureIndex % nth !== 0
+    );
   }
 
   async capture() {
@@ -389,10 +409,11 @@ export default class VideoCreator extends PluginController {
           this.isSliderVariableValid() &&
           this.isSliderSettingValid("min") &&
           this.isSliderSettingValid("max") &&
-          this.isSliderSettingValid("step")
+          this.isSliderSettingValid("step") &&
+          this.isNthFrameValid()
         );
       case "action":
-        return this.isTickCountValid();
+        return this.isTickCountValid() && this.isNthFrameValid();
       case "ticks":
         return this.isTickCountValid() && this.isTickTimeStepValid();
       default: {

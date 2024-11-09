@@ -195,6 +195,7 @@ video-creator-angle-to = Hasta:
 video-creator-angle-step = Paso:
 video-creator-angle-speed = Velocidad:
 video-creator-step-count = Número de pasos:
+video-creator-nth-frame = n-ésimo cuadro:
 video-creator-frame-count = Número de cuadros:
 video-creator-target-same-pixel-ratio = Mantener la misma proporción de píxeles.
 video-creator-fast-screenshot = Captura rápida

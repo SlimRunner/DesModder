@@ -187,6 +187,7 @@ video-creator-angle-to = To:
 video-creator-angle-step = Step:
 video-creator-angle-speed = Speed:
 video-creator-step-count = Step count:
+video-creator-nth-frame = nth frame:
 video-creator-frame-count = Frame count:
 video-creator-target-same-pixel-ratio = Target same pixel ratio
 video-creator-fast-screenshot = Fast captures
