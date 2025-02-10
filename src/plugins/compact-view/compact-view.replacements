@@ -26,7 +26,7 @@ __jsx_template_exit__
 
 ## Track when expression divs go into screen
 
-*Description* `Captures the expressions that go enter the screen`
+*Description* `Captures the expressions that scroll into the screen`
 
 This one was found by simply searching for "dcg-expressionfolder" in the
 client-side code
@@ -37,6 +37,7 @@ client-side code
     class: () => ({
       "dcg-do-not-blur": !0,
       "dcg-expressionitem": !0,
+      "dcg-highlighted-expressionitem": this.controller.isExpressionHighlighted(this.id),
       "dcg-readonly": this.controller.isItemReadonly(this.id),
       "dcg-expressionfolder": !0,
 ```
