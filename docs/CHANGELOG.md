@@ -1,5 +1,16 @@
 # DesModder Changelog
 
+## 0.15.10
+
+Bug fixes:
+
+- Fix padding on DesModder menus.
+- (Video Creator) Support typing into math fields with keypad.
+
+Translations:
+
+- Updates to Spanish translations.
+
 ## 0.15.9
 
 New features:
