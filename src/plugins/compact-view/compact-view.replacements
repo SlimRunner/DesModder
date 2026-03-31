@@ -33,11 +33,11 @@ client-side code
 
 *Find* => `jsx_template_enter`
 ```js
-  return $.createElement("div", {
+  return $f("div", {
     class: () => ({
       "dcg-do-not-blur": !0,
       "dcg-expressionitem": !0,
-      "dcg-highlighted-expressionitem": this.controller.isExpressionHighlighted(this.id),
+      "dcg-highlighted-expressionitem": this.controller.shouldAddExpressionHighlightedClass(this.id),
       "dcg-readonly": this.controller.isItemReadonly(this.id),
       "dcg-expressionfolder": !0,
 ```
