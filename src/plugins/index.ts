@@ -33,7 +33,7 @@ import QuakePro from "./quake-pro";
 import OverrideKeystroke from "../core-plugins/override-keystroke";
 import { DispatchedEvent } from "src/globals/extra-actions";
 import ScrollBeyond from "./scroll-beyond";
-import ChangeUsername from "./sample-plugin";
+import SamplePlugin from "./sample-plugin";
 
 interface ConfigItemGeneric {
   // indentation level for hierarchical relationships in settings
@@ -150,7 +150,7 @@ export const keyToPlugin = {
   codeGolf: CodeGolf,
   syntaxHighlighting: SyntaxHighlighting,
   betterNavigation: BetterNavigation,
-  changeUsername: ChangeUsername,
+  samplePlugin: SamplePlugin,
   pasteImage: PasteImage,
   quakePro: QuakePro,
 } satisfies Record<string, Plugin<any>>;
@@ -208,7 +208,7 @@ export class TransparentPlugins implements KeyToPluginInstance {
   get codeGolf () { return this.ep["code-golf"]; }
   get syntaxHighlighting () { return this.ep["syntax-highlighting"]}
   get betterNavigation () { return this.ep["better-navigation"]} 
-  get changeUsername () { return this.ep["sample-plugin"] }
+  get samplePlugin () { return this.ep["sample-plugin"] }
   get pasteImage () { return this.ep["paste-image"]; }
   get quakePro () { return this.ep["quake-pro"]; }
 }

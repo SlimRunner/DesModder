@@ -42,7 +42,7 @@ function disableContextMenu(evt: HTMLElementEventMap["contextmenu"]) {
   }
 }
 
-export default class ChangeUsername extends PluginController<Config> {
+export default class SamplePlugin extends PluginController<Config> {
   static id = "sample-plugin" as const;
   static enabledByDefault = true;
   static config = configList;
