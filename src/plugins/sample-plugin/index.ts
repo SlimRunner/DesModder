@@ -1,6 +1,8 @@
 import { PluginController } from "#plugins/PluginController.js";
 import { Config, configList } from "./config";
 import { AllActions, DispatchedEvent } from "../../globals/extra-actions";
+import { DCGView, MountedComponent } from "#DCGView";
+import { MessageBox } from "./components/sample";
 
 declare module "src/globals/extra-actions" {
   interface AllActions {
@@ -11,8 +13,33 @@ declare module "src/globals/extra-actions" {
   }
 }
 
+function parentClassCheck(elem: HTMLElement, className: string | string[]) {
+  if (Array.isArray(className)) {
+    for (let e: HTMLElement | null = elem; e != null; e = e.parentElement) {
+      for (const cName of className) {
+        if (e.classList.contains(cName)) return true;
+      }
+    }
+  } else {
+    for (let e: HTMLElement | null = elem; e != null; e = e.parentElement) {
+      if (e.classList.contains(className)) return true;
+    }
+  }
+
+  return false;
+}
+
 function getHeaderElement(): HTMLElement | null {
   return document.querySelector(".header-account-name");
+}
+
+function disableContextMenu(evt: HTMLElementEventMap["contextmenu"]) {
+  if (
+    evt.target instanceof HTMLElement &&
+    parentClassCheck(evt.target, ["dcg-expressionitem", "sample-plugin"])
+  ) {
+    evt.preventDefault();
+  }
 }
 
 export default class ChangeUsername extends PluginController<Config> {
@@ -20,6 +47,9 @@ export default class ChangeUsername extends PluginController<Config> {
   static enabledByDefault = true;
   static config = configList;
   oldName = "";
+  clickSurface: HTMLElement | null = null;
+  view: MountedComponent | null = null;
+  mountPoint: HTMLDivElement | null = null;
 
   enabledByDefault = false;
 
@@ -36,6 +66,12 @@ export default class ChangeUsername extends PluginController<Config> {
   }
 
   afterEnable() {
+    this.clickSurface = document.getElementById("graph-container");
+    this.clickSurface?.addEventListener("mouseup", (evt) =>
+      this.clickCallback(evt)
+    );
+    document.addEventListener("contextmenu", disableContextMenu);
+
     const headerElement = getHeaderElement();
     if (headerElement === null) {
       return;
@@ -48,11 +84,46 @@ export default class ChangeUsername extends PluginController<Config> {
   }
 
   afterDisable() {
+    this.clickSurface?.removeEventListener("mouseup", (evt) =>
+      this.clickCallback(evt)
+    );
+    document.removeEventListener("contextmenu", disableContextMenu);
+
     const headerElement = getHeaderElement();
     if (headerElement === null) {
       return;
     }
     headerElement.innerText = this.oldName;
+  }
+
+  clickCallback(evt: HTMLElementEventMap["mouseup"]) {
+    if (evt.button !== 2) {
+      this.unmountContextMenu();
+      return;
+    }
+    if (
+      evt.target instanceof HTMLElement &&
+      parentClassCheck(evt.target, "dcg-expressionitem")
+    ) {
+      this.mountPoint ??= document.createElement("div");
+      this.mountPoint.classList.add("sample-plugin");
+      this.mountPoint.style.position = "absolute";
+      this.mountPoint.style.zIndex = "999999";
+      this.mountPoint.style.left = `${evt.clientX}px`;
+      this.mountPoint.style.top = `${evt.clientY}px`;
+      document.body.appendChild(this.mountPoint);
+      this.view ??= DCGView.mountToNode(MessageBox, this.mountPoint, {});
+    } else {
+      this.unmountContextMenu();
+    }
+  }
+
+  unmountContextMenu() {
+    if (!this.mountPoint) return;
+    DCGView.unmountFromNode(this.mountPoint);
+    document.body.removeChild(this.mountPoint);
+    this.view = null;
+    this.mountPoint = null;
   }
 
   getPolynomial() {
