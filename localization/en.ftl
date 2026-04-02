@@ -372,6 +372,8 @@ sample-plugin-name = Sample Plugin
 sample-plugin-desc = Showcase of things plugins can do
 sample-plugin-opt-customText-name = Custom text
 sample-plugin-opt-customText-desc = Text that will replace the username.
+sample-plugin-opt-option-name = A custom control
+sample-plugin-opt-option-desc = Choose any letter you like
 
 ## Paste Image
 paste-image-name = Paste Image
