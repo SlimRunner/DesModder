@@ -108,7 +108,6 @@ export default class SamplePlugin extends PluginController<Config> {
       this.mountPoint ??= document.createElement("div");
       this.mountPoint.classList.add("sample-plugin");
       this.mountPoint.style.position = "absolute";
-      this.mountPoint.style.zIndex = "999999";
       this.mountPoint.style.left = `${evt.clientX}px`;
       this.mountPoint.style.top = `${evt.clientY}px`;
       document.body.appendChild(this.mountPoint);
