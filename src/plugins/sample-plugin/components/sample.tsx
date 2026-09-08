@@ -1,35 +1,46 @@
 import { Button, Tooltip } from "#components";
 import { Component, jsx } from "#DCGView";
+import { format } from "#i18n";
+import SamplePlugin from "..";
 import "./sample.less";
 
-export class MessageBox extends Component {
+export class ContextMenu extends Component<{ plugin: SamplePlugin }> {
+  plugin!: SamplePlugin;
+
+  init(): void {
+    this.plugin = this.props.plugin();
+  }
+
   template() {
     return (
       <div class="dcg-popover-interior dsm-sample-context-menu">
         <ul>
           <li>
-            <Tooltip tooltip={"huh"}>
+            <Tooltip tooltip={format("simple-plugin-ctxmenu-tip-btn1")}>
               <Button
                 color="light-gray"
                 class="dsm-sample-context-menu-button"
                 onTap={() => {
-                  // pressed button 1
+                  this.plugin.unmountContextMenu();
                 }}
               >
-                {"Button 1"}
+                {format("simple-plugin-ctxmenu-btn1")}
               </Button>
             </Tooltip>
           </li>
           <li>
-            <Tooltip tooltip={"huh"}>
+            <Tooltip tooltip={format("simple-plugin-ctxmenu-tip-btn2")}>
               <Button
                 color="light-gray"
                 class="dsm-sample-context-menu-button"
                 onTap={() => {
-                  // pressed button 2
+                  this.plugin.cc.dispatch({
+                    type: "dsm-simple-plugin-add-random-polynomial",
+                  });
+                  this.plugin.unmountContextMenu();
                 }}
               >
-                {"Button 2"}
+                {format("simple-plugin-ctxmenu-btn2")}
               </Button>
             </Tooltip>
           </li>

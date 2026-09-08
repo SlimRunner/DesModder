@@ -2,13 +2,12 @@ import { PluginController } from "#plugins/PluginController.js";
 import { Config, configList } from "./config";
 import { AllActions, DispatchedEvent } from "../../globals/extra-actions";
 import { DCGView, MountedComponent } from "#DCGView";
-import { MessageBox } from "./components/sample";
+import { ContextMenu } from "./components/sample";
 
 declare module "src/globals/extra-actions" {
   interface AllActions {
     "simple-plugin": {
       type: "dsm-simple-plugin-add-random-polynomial";
-      index: number;
     };
   }
 }
@@ -111,7 +110,9 @@ export default class SamplePlugin extends PluginController<Config> {
       this.mountPoint.style.left = `${evt.clientX}px`;
       this.mountPoint.style.top = `${evt.clientY}px`;
       document.body.appendChild(this.mountPoint);
-      this.view ??= DCGView.mountToNode(MessageBox, this.mountPoint, {});
+      this.view ??= DCGView.mountToNode(ContextMenu, this.mountPoint, {
+        plugin: () => this,
+      });
     } else {
       this.unmountContextMenu();
     }
