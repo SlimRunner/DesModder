@@ -378,6 +378,13 @@ sample-plugin-opt-customText-name = Custom text
 sample-plugin-opt-customText-desc = Text that will replace the username.
 sample-plugin-opt-option-name = A custom control
 sample-plugin-opt-option-desc = Choose any letter you like
+simple-plugin-opt-option-01 = op1
+simple-plugin-opt-option-02 = op2
+simple-plugin-opt-option-03 = op3
+simple-plugin-ctxmenu-btn1 = close menu
+simple-plugin-ctxmenu-btn2 = add polynomial
+simple-plugin-ctxmenu-tip-btn1 = does nothing and closes this menu
+simple-plugin-ctxmenu-tip-btn2 = adds polynomial at selected expression
 
 ## Paste Image
 paste-image-name = Paste Image

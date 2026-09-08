@@ -10,7 +10,11 @@ export const configList = [
   {
     type: "segmented-options",
     key: "option",
-    options: ["A", "Option1", "Option2"],
+    options: [
+      { name: "A", i18nKey: "simple-plugin-opt-option-01" },
+      { name: "Option1", i18nKey: "simple-plugin-opt-option-02" },
+      { name: "Option2", i18nKey: "simple-plugin-opt-option-03" },
+    ],
     default: "A",
   },
 ] satisfies readonly ConfigItem[];
